@@ -22,6 +22,7 @@ namespace HospitalAPI.Data
                 entity.Property(e => e.address).HasColumnName("address");
                 entity.Property(e => e.date_of_birth).HasColumnName("date_of_birth");
                 entity.Property(e => e.occupation).HasColumnName("occupation");
+                entity.Property(e => e.phone_number).HasColumnName("phone_number");
             });
         }
 

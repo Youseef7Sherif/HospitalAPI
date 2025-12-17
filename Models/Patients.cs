@@ -32,5 +32,7 @@ namespace HospitalAPI.Models
         [Required]
         public string national_id { get; set; }
 
+        [Required]
+        public string phone_number { get; set; }
     }
 }

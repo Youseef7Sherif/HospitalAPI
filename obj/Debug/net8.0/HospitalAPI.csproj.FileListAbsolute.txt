@@ -138,3 +138,4 @@ D:\projects\HospitalAPI\obj\Debug\net8.0\refint\HospitalAPI.dll
 D:\projects\HospitalAPI\obj\Debug\net8.0\HospitalAPI.pdb
 D:\projects\HospitalAPI\obj\Debug\net8.0\HospitalAPI.genruntimeconfig.cache
 D:\projects\HospitalAPI\obj\Debug\net8.0\ref\HospitalAPI.dll
+D:\projects\HospitalAPI\obj\Debug\net8.0\HospitalAPI.sourcelink.json

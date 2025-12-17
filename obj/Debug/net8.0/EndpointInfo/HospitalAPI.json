@@ -131,7 +131,8 @@
           "last_name",
           "national_id",
           "occupation",
-          "password"
+          "password",
+          "phone_number"
         ],
         "type": "object",
         "properties": {
@@ -168,6 +169,10 @@
             "type": "string"
           },
           "national_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "phone_number": {
             "minLength": 1,
             "type": "string"
           }
