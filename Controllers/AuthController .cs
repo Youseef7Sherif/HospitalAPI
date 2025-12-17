@@ -20,6 +20,10 @@ public class AuthController : ControllerBase
         if (patient == null)
             return BadRequest("Patient data is required.");
 
+        // Validate email contains "@"
+        if (string.IsNullOrEmpty(patient.email) || !patient.email.Contains("@"))
+            return BadRequest("Invalid email. Email must contain '@'.");
+
         var existingPatient = await _context.Patients
             .FirstOrDefaultAsync(p => p.email == patient.email);
 
@@ -44,6 +48,9 @@ public class AuthController : ControllerBase
     {
         if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Password))
             return BadRequest("Email and password are required.");
+
+        if (!loginRequest.Email.Contains("@"))
+            return BadRequest("Invalid email. Email must contain '@'.");
 
         var patient = await _context.Patients
             .FirstOrDefaultAsync(p => p.email == loginRequest.Email);
