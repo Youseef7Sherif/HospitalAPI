@@ -1,8 +1,12 @@
 ﻿using HospitalAPI.Data;
 using HospitalAPI.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace HospitalAPI.Controllers
@@ -18,15 +22,23 @@ namespace HospitalAPI.Controllers
             _context = context;
         }
 
-        [HttpPost("BookAppointmentNow")]
-        public async Task<IActionResult> BookAppointmentNow([FromBody] int patientId)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("BookAppointmentNow")]
+        public async Task<IActionResult> BookAppointmentNow()
         {
+            // استخراج PatientId من الـ JWT token
+            var patientIdClaim = User.Claims.FirstOrDefault(c => c.Type == "PatientId");
+            if (patientIdClaim == null)
+                return Unauthorized(new { message = "PatientId not found in token." });
+
+            int patientId = int.Parse(patientIdClaim.Value);
+
             // التأكد أن المريض موجود
             var patient = await _context.Patients
                 .FirstOrDefaultAsync(p => p.patient_id == patientId);
 
             if (patient == null)
-                return NotFound("Patient not found.");
+                return NotFound(new { message = "Patient not found." });
 
             // تحديد ميعاد اليوم التالي
             DateTime nextDay = DateTime.Today.AddDays(1);
@@ -41,7 +53,7 @@ namespace HospitalAPI.Controllers
                                && EF.Functions.DateDiffDay(a.AppointmentDate, nextDay) == 0);
 
             if (alreadyBooked)
-                return BadRequest("You already have an appointment for the next day.");
+                return BadRequest(new { message = "You already have an appointment for the next day." });
 
             // حساب رقم الدور لليوم ده
             int queueNumber = await _context.Appointments
@@ -62,8 +74,9 @@ namespace HospitalAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                return BadRequest("You already have an appointment for this day.");
+                return BadRequest(new { message = "You already have an appointment for this day." });
             }
+
 
             // الرد للمريض
             return Ok(new

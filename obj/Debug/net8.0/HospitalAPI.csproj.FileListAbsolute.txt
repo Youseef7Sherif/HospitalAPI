@@ -139,3 +139,4 @@ D:\projects\HospitalAPI\obj\Debug\net8.0\HospitalAPI.pdb
 D:\projects\HospitalAPI\obj\Debug\net8.0\HospitalAPI.genruntimeconfig.cache
 D:\projects\HospitalAPI\obj\Debug\net8.0\ref\HospitalAPI.dll
 D:\projects\HospitalAPI\obj\Debug\net8.0\HospitalAPI.sourcelink.json
+D:\projects\HospitalAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

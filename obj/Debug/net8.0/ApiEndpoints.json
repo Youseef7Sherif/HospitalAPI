@@ -35,16 +35,10 @@
     "ContainingType": "HospitalAPI.Controllers.BookController",
     "Method": "BookAppointmentNow",
     "RelativePath": "api/Book/BookAppointmentNow",
-    "HttpMethod": "POST",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "patientId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]
